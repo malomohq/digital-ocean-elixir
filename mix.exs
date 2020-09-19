@@ -20,6 +20,9 @@ defmodule DigitalOcean.MixProject do
 
   defp deps do
     [
+      { :hackney, "~> 1.16", optional: true },
+
+      { :jason, "~> 1.2", optional: true },
       #
       # dev
       #
