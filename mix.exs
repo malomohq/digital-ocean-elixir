@@ -8,7 +8,8 @@ defmodule DigitalOcean.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: dialyzer()
+      dialyzer: dialyzer(),
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
@@ -38,5 +39,13 @@ defmodule DigitalOcean.MixProject do
       plt_add_apps: [:hackney],
       plt_core_path: "_build/#{Mix.env()}"
     ]
+  end
+
+  defp elixirc_paths(:test) do
+    ["lib/", "test/"]
+  end
+
+  defp elixirc_paths(_env) do
+    ["lib"]
   end
 end
