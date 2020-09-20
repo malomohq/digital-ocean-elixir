@@ -20,7 +20,8 @@ defmodule DigitalOcean.Helpers.Url do
     |> put_query(operation)
   end
 
-  defp put_query(uri, %_{ method: :get, params: params }) when not is_nil(params) do
+  defp put_query(uri, %_{ method: method, params: params })
+       when (method == :delete or method == :get) and not is_nil(params) do
     Map.put(uri, :query, URI.encode_query(params))
   end
 

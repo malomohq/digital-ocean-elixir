@@ -35,6 +35,20 @@ defmodule DigitalOceanTest do
     assert "https://api.digitalocean.com/v2/fake?hello=world" == Http.Mock.get_request_url()
   end
 
+  test "uses the proper URL for DELETE requests" do
+    Http.Mock.start_link()
+
+    response = { :ok, @ok_resp }
+
+    Http.Mock.put_response(response)
+
+    operation = %Operation{ method: :delete, params: [hello: "world"], path: "/fake" }
+
+    DigitalOcean.request(operation, http_client: Http.Mock)
+
+    assert "https://api.digitalocean.com/v2/fake?hello=world" == Http.Mock.get_request_url()
+  end
+
   test "uses the proper URL for non-GET requests" do
     Http.Mock.start_link()
 
@@ -72,6 +86,20 @@ defmodule DigitalOceanTest do
     Http.Mock.put_response(response)
 
     operation = %Operation{ method: :get, params: [hello: "world"], path: "/fake" }
+
+    DigitalOcean.request(operation, http_client: Http.Mock)
+
+    assert "" == Http.Mock.get_request_body()
+  end
+
+  test "sends the proper body for DELETE requests" do
+    Http.Mock.start_link()
+
+    response = { :ok, @ok_resp }
+
+    Http.Mock.put_response(response)
+
+    operation = %Operation{ method: :delete, params: [hello: "world"], path: "/fake" }
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
