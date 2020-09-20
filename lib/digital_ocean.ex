@@ -13,6 +13,9 @@ defmodule DigitalOcean do
   @type http_status_code_t ::
           pos_integer
 
+  @type id_t ::
+          integer
+
   @spec request(Operation.t(), Keyword.t()) :: http_response_t
   def request(operation, config \\ []) do
     Request.send(operation, Enum.into(config, %{}))
