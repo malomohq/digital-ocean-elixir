@@ -4,7 +4,7 @@ defmodule DigitalOcean.CDNEndpoint do
   @doc """
   Create a CDN endpoint.
 
-  ## Example
+  ## Examples
 
       iex> DigitalOcean.CDNEndpoint.create("static-images.nyc3.digitaloceanspaces.com") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
@@ -22,7 +22,7 @@ defmodule DigitalOcean.CDNEndpoint do
   @doc """
   Delete a CDN endpoint.
 
-  ## Example
+  ## Examples
 
       iex> DigitalOcean.CDNEndpoint.delete("19f06b6a-3ace-4315-b086-499a0e521b76") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
@@ -37,7 +37,7 @@ defmodule DigitalOcean.CDNEndpoint do
   @doc """
   Retrieve details about a specific CDN endpoint.
 
-  ## Example
+  ## Examples
 
       iex> DigitalOcean.CDNEndpoint.get("19f06b6a-3ace-4315-b086-499a0e521b76") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
@@ -52,7 +52,7 @@ defmodule DigitalOcean.CDNEndpoint do
   @doc """
   Retrieve a list of CDN endpoints.
 
-  ## Examples
+  ## Exampless
 
       iex> DigitalOcean.CDNEndpoint.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
@@ -86,7 +86,7 @@ defmodule DigitalOcean.CDNEndpoint do
   @doc """
   Update a CDN endpoint.
 
-  ## Example
+  ## Examples
 
       iex: DigitalOcean.CDNEndpoint.update("19f06b6a-3ace-4315-b086-499a0e521b76", ttl: 1800)
       { :ok, %DigitalOcean.Response{} }
