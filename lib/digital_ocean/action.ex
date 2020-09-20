@@ -6,7 +6,7 @@ defmodule DigitalOcean.Action do
 
   ## Examples
 
-      DigitalOcean.Action.get(36804636) |> DigitalOcean.request()
+      iex> DigitalOcean.Action.get(36804636) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec get(DigitalOcean.id_t()) :: Operation.t()
@@ -21,7 +21,7 @@ defmodule DigitalOcean.Action do
 
   ## Examples
 
-      DigitalOcean.Action.list() |> DigitalOcean.request()
+      iex> DigitalOcean.Action.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec list :: Operation.t()
