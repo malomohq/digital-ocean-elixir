@@ -110,7 +110,7 @@ defmodule DigitalOcean.Volume do
   end
 
   @doc """
-  Retrieve a list of all volumes available on your account.
+  Retrieve a list of volumes available on your account.
 
   ## Examples
 
@@ -126,7 +126,7 @@ defmodule DigitalOcean.Volume do
   end
 
   @doc """
-  Retrieve a list of all snapshots for a volume.
+  Retrieve a list of snapshots for a volume.
 
   ## Examples
 
