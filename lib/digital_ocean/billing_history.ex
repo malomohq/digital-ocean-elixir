@@ -2,7 +2,7 @@ defmodule DigitalOcean.BillingHistory do
   alias DigitalOcean.{ Operation }
 
   @doc """
-  Retrieve a list of billing history for your account.
+  Retrieve a list of your billing history.
 
   ## Examples
 
