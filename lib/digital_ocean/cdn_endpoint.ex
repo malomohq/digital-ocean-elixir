@@ -50,7 +50,7 @@ defmodule DigitalOcean.CDNEndpoint do
   end
 
   @doc """
-  Retrieve a list of all CDN endpoints.
+  Retrieve a list of CDN endpoints.
 
   ## Examples
 
