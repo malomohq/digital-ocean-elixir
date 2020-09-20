@@ -56,7 +56,7 @@ defmodule DigitalOcean.VolumeAction do
   end
 
   @doc """
-  Retrieve a list of all actions that have been executed on a volume.
+  Retrieve a list of actions that have been executed on a volume.
 
   ## Examples
 
