@@ -2,7 +2,7 @@ defmodule DigitalOcean.Balance do
   alias DigitalOcean.{ Operation }
 
   @doc """
-  Retrieve a the balance for your account.
+  Retrieve the balance for your account.
 
   ## Examples
 
