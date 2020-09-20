@@ -5,7 +5,7 @@ defmodule DigitalOcean.MixProject do
     [
       app: :digital_ocean,
       version: "0.0.0",
-      elixir: "~> 1.10",
+      elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       dialyzer: dialyzer(),
