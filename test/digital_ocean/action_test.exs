@@ -13,11 +13,14 @@ defmodule DigitalOcean.ActionTest do
     assert expected == Action.get(action_id)
   end
 
-  test "list/0" do
+  test "list/1" do
+    page = 1
+
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
+    expected = Map.put(expected, :params, [page: page])
     expected = Map.put(expected, :path, "/actions")
 
-    assert expected == Action.list()
+    assert expected == Action.list(page: page)
   end
 end

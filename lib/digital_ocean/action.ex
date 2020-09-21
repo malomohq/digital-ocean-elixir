@@ -24,10 +24,11 @@ defmodule DigitalOcean.Action do
       iex> DigitalOcean.Action.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec list :: Operation.t()
-  def list do
+  @spec list(Keyword.t()) :: Operation.t()
+  def list(opts \\ []) do
     %Operation{}
     |> Map.put(:method, :get)
+    |> Map.put(:params, opts)
     |> Map.put(:path, "/actions")
   end
 end
