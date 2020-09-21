@@ -6,14 +6,15 @@ defmodule DigitalOcean.Certificate do
 
   ## Examples
 
-      iex> DigitalOcean.Certificate.create("le-cert-01", "lets_encrypt", dns_names: ["example.com"]) |> DigitalOcean.request()
+      iex> DigitalOcean.Certificate.create(
+      ...>   name: "le-cert-01",
+      ...>   type: "lets_encrypt",
+      ...>   dns_names: ["example.com"]
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec create(String.t(), String.t(), Keyword.t()) :: Operation.t()
-  def create(name, type, opts \\ []) do
-    opts = Keyword.put(opts, :name, name)
-    opts = Keyword.put(opts, :type, type)
-
+  @spec create(Keyword.t()) :: Operation.t()
+  def create(opts) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -25,7 +26,7 @@ defmodule DigitalOcean.Certificate do
 
   ## Examples
 
-      iex> DigitalOcean.Certificate.delete("892071a0-bb95-49bc-8021-3afd67a210bf")
+      iex> DigitalOcean.Certificate.delete("892071a0-bb95-49bc-8021-3afd67a210bf") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec delete(String.t()) :: Operation.t()
