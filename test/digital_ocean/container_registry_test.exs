@@ -3,17 +3,6 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
   alias DigitalOcean.{ ContainerRegistry, Operation }
 
-  test "configure/1" do
-    name = "example"
-
-    expected = %Operation{}
-    expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [name: name])
-    expected = Map.put(expected, :path, "/registry")
-
-    assert expected == ContainerRegistry.configure(name)
-  end
-
   test "delete/0" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
@@ -92,6 +81,17 @@ defmodule DigitalOcean.ContainerRegistryTest do
     expected = Map.put(expected, :path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags")
 
     assert expected == ContainerRegistry.list_repository_tags(container_registry_name, repository_name, page: page)
+  end
+
+  test "update/1" do
+    name = "example"
+
+    expected = %Operation{}
+    expected = Map.put(expected, :method, :post)
+    expected = Map.put(expected, :params, [name: name])
+    expected = Map.put(expected, :path, "/registry")
+
+    assert expected == ContainerRegistry.update(name: name)
   end
 
   test "validate_name/1" do

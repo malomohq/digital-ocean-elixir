@@ -2,22 +2,6 @@ defmodule DigitalOcean.ContainerRegistry do
   alias DigitalOcean.{ Operation }
 
   @doc """
-  Configure your container registry.
-
-  ## Examples
-
-      iex> DigitalOcean.ContainerRegistry.configure("example") |> DigitalOcean.request()
-      { :ok, DigitalOcean.Response{} }
-  """
-  @spec configure(String.t()) :: Operation.t()
-  def configure(container_registry_name) do
-    %Operation{}
-    |> Map.put(:method, :post)
-    |> Map.put(:params, [name: container_registry_name])
-    |> Map.put(:path, "/registry")
-  end
-
-  @doc """
   Delete your container registry.
 
   ## Examples
@@ -122,6 +106,22 @@ defmodule DigitalOcean.ContainerRegistry do
     |> Map.put(:method, :get)
     |> Map.put(:params, opts)
     |> Map.put(:path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags")
+  end
+
+  @doc """
+  Update your container registry.
+
+  ## Examples
+
+      iex> DigitalOcean.ContainerRegistry.update(name: "example") |> DigitalOcean.request()
+      { :ok, DigitalOcean.Response{} }
+  """
+  @spec update(Keyword.t()) :: Operation.t()
+  def update(opts) do
+    %Operation{}
+    |> Map.put(:method, :post)
+    |> Map.put(:params, opts)
+    |> Map.put(:path, "/registry")
   end
 
   @doc """
