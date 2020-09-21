@@ -6,15 +6,15 @@ defmodule DigitalOcean.Volume do
 
   ## Examples
 
-      iex> DigitalOcean.Volume.create("example", "nyc1", 10) |> DigitalOcean.request()
+      iex> DigitalOcean.Volume.create(
+      ...>   name: "example",
+      ...>   region: "nyc1",
+      ...>   size_gigabytes: 10
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec create(String.t(), String.t(), integer, Keyword.t()) :: Operation.t()
-  def create(name, region, size_in_gb, opts \\ []) do
-    opts = Keyword.put(opts, :name, name)
-    opts = Keyword.put(opts, :region, region)
-    opts = Keyword.put(opts, :size_gigabytes, size_in_gb)
-
+  @spec create(Keyword.t()) :: Operation.t()
+  def create(opts) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -26,13 +26,14 @@ defmodule DigitalOcean.Volume do
 
   ## Examples
 
-      iex> DigitalOcean.Volume.create_snapshot("82a48a18-873f-11e6-96bf-000f53315a41", "big-data-snapshot1475261774")
+      iex> DigitalOcean.Volume.create_snapshot(
+      ...>   "82a48a18-873f-11e6-96bf-000f53315a41",
+      ...>   name: "big-data-snapshot1475261774"
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec create_snapshot(String.t(), String.t(), Keyword.t()) :: Operation.t()
-  def create_snapshot(volume_id, name, opts \\ []) do
-    opts = Keyword.put(opts, :name, name)
-
+  @spec create_snapshot(String.t(), Keyword.t()) :: Operation.t()
+  def create_snapshot(volume_id, opts \\ []) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -44,7 +45,7 @@ defmodule DigitalOcean.Volume do
 
   ## Examples
 
-      iex> DigitalOcean.Volume.delete("7724db7c-e098-11e5-b522-000f53304e51")
+      iex> DigitalOcean.Volume.delete("7724db7c-e098-11e5-b522-000f53304e51") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec delete(String.t()) :: Operation.t()
@@ -59,18 +60,17 @@ defmodule DigitalOcean.Volume do
 
   ## Examples
 
-      iex> DigitalOcean.Volume.delete_by_name("example", "nyc1")
+      iex> DigitalOcean.Volume.delete_by_name(
+      ...>   name: "example",
+      ...>   region: "nyc1"
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec delete_by_name(String.t(), String.t()) :: Operation.t()
-  def delete_by_name(name, region) do
-    params = Keyword.new()
-    params = Keyword.put(params, :name, name)
-    params = Keyword.put(params, :region, region)
-
+  @spec delete_by_name(Keyword.t()) :: Operation.t()
+  def delete_by_name(opts) do
     %Operation{}
     |> Map.put(:method, :delete)
-    |> Map.put(:params, params)
+    |> Map.put(:params, opts)
     |> Map.put(:path, "/volumes")
   end
 
@@ -79,7 +79,7 @@ defmodule DigitalOcean.Volume do
 
   ## Examples
 
-      iex> DigitalOcean.Volume.get("7724db7c-e098-11e5-b522-000f53304e51")
+      iex> DigitalOcean.Volume.get("7724db7c-e098-11e5-b522-000f53304e51") |> DigitalOcean.request()
       { :ok, DigitalOcean.Response{} }
   """
   @spec get(String.t()) :: Operation.t()
@@ -94,18 +94,17 @@ defmodule DigitalOcean.Volume do
 
   ## Example
 
-      iex> DigitalOcean.Volume.get("example", "nyc1") > DigitalOcean.request()
+      iex> DigitalOcean.Volume.get(
+      ...>   name: "example",
+      ...>   region: "nyc1"
+      ...> ) > DigitalOcean.request()
       { :ok, DigitalOcean.Response{} }
   """
-  @spec get_by_name(String.t(), String.t()) :: Operation.t()
-  def get_by_name(name, region) do
-    params = Keyword.new()
-    params = Keyword.put(params, :name, name)
-    params = Keyword.put(params, :region, region)
-
+  @spec get_by_name(Keyword.t()) :: Operation.t()
+  def get_by_name(opts) do
     %Operation{}
     |> Map.put(:method, :get)
-    |> Map.put(:params, params)
+    |> Map.put(:params, opts)
     |> Map.put(:path, "/volumes")
   end
 
