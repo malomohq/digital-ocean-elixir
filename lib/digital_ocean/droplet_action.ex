@@ -24,7 +24,7 @@ defmodule DigitalOcean.DropletAction do
   end
 
   @doc """
-  Create an action for droplets by a tag.
+  Create an action for droplets by tag.
 
   ## Examples
 
