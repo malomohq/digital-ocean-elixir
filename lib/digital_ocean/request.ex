@@ -12,6 +12,7 @@ defmodule DigitalOcean.Request do
     headers = []
     headers = headers ++ [{ "content-type", "application/json" }]
     headers = headers ++ [{ "authorization", "Bearer #{config.access_token}" }]
+    headers = headers ++ operation.headers
 
     body = Helpers.Body.encode!(operation, config)
 

@@ -70,12 +70,17 @@ defmodule DigitalOceanTest do
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :get, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{}
+    operation = Map.put(operation, :headers, [{ "x-custom-header", "true" }])
+    operation = Map.put(operation, :method, :get)
+    operation = Map.put(operation, :params, [hello: "world"])
+    operation = Map.put(operation, :path, "/fake")
 
     DigitalOcean.request(operation, access_token: "thisisfake", http_client: Http.Mock)
 
     assert { "content-type", "application/json" } in Http.Mock.get_request_headers()
     assert { "authorization", "Bearer thisisfake" } in Http.Mock.get_request_headers()
+    assert { "x-custom-header", "true" } in Http.Mock.get_request_headers()
   end
 
   test "sends the proper body for GET requests" do
