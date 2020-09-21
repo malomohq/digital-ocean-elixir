@@ -13,7 +13,7 @@ defmodule DigitalOcean.CDNEndpointTest do
     expected = Map.put(expected, :params, [origin: origin, ttl: ttl])
     expected = Map.put(expected, :path, "/cdn/endpoints")
 
-    assert expected == CDNEndpoint.create(origin, ttl: ttl)
+    assert expected == CDNEndpoint.create(origin: origin, ttl: ttl)
   end
 
   test "delete/1" do
@@ -57,7 +57,7 @@ defmodule DigitalOcean.CDNEndpointTest do
     expected = Map.put(expected, :params, [files: files])
     expected = Map.put(expected, :path, "/cdn/endpoints/#{endpoint_id}/cache")
 
-    assert expected == CDNEndpoint.purge_cache(endpoint_id, files)
+    assert expected == CDNEndpoint.purge_cache(endpoint_id, files: files)
   end
 
   test "update/2" do

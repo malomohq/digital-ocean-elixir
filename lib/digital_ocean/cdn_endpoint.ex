@@ -6,13 +6,16 @@ defmodule DigitalOcean.CDNEndpoint do
 
   ## Examples
 
-      iex> DigitalOcean.CDNEndpoint.create("static-images.nyc3.digitaloceanspaces.com") |> DigitalOcean.request()
+      iex> DigitalOcean.CDNEndpoint.create(
+      ...>   origin: "static-images.nyc3.digitaloceanspaces.com",
+      ...>   certificate_id: "892071a0-bb95-49bc-8021-3afd67a210bf",
+      ...>   custom_domain: "static.example.com",
+      ...>   ttl: 3600
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec create(String.t(), Keyword.t()) :: Operation.t()
-  def create(origin, opts \\ []) do
-    opts = Keyword.put(opts, :origin, origin)
-
+  @spec create(Keyword.t()) :: Operation.t()
+  def create(opts) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -70,16 +73,16 @@ defmodule DigitalOcean.CDNEndpoint do
 
   ## Examples
 
-      iex> DigitalOcean.CDNEndpoint.purge_cache("19f06b6a-3ace-4315-b086-499a0e521b76", ["*"])
+      iex> DigitalOcean.CDNEndpoint.purge_cache(
+      ...>   "19f06b6a-3ace-4315-b086-499a0e521b76",
+      ...>   files: ["*"]
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  def purge_cache(endpoint_id, files) do
-    params = Keyword.new()
-    params = Keyword.put(params, :files, files)
-
+  def purge_cache(endpoint_id, opts) do
     %Operation{}
     |> Map.put(:method, :delete)
-    |> Map.put(:params, params)
+    |> Map.put(:params, opts)
     |> Map.put(:path, "/cdn/endpoints/#{endpoint_id}/cache")
   end
 
@@ -88,7 +91,10 @@ defmodule DigitalOcean.CDNEndpoint do
 
   ## Examples
 
-      iex: DigitalOcean.CDNEndpoint.update("19f06b6a-3ace-4315-b086-499a0e521b76", ttl: 1800)
+      iex> DigitalOcean.CDNEndpoint.update(
+      ...>   "19f06b6a-3ace-4315-b086-499a0e521b76",
+      ...>   ttl: 1800
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec update(String.t(), Keyword.t()) :: Operation.t()
