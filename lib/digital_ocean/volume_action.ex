@@ -2,18 +2,41 @@ defmodule DigitalOcean.VolumeAction do
   alias DigitalOcean.{ Operation }
 
   @doc """
-  Attach a volume to a droplet.
+  Create an action for a volume.
 
-  ## Examples
+  ## Example for attaching a volume to a droplet
 
-      iex> DigitalOcean.VolumeAction.attach_volume_to_droplet("7724db7c-e098-11e5-b522-000f53304e51", 11612190) |> DigitalOcean.request()
+      iex> DigitalOcean.VolumeAction.create(
+      ...>   "7724db7c-e098-11e5-b522-000f53304e51",
+      ...>   type: "attach",
+      ...>   droplet_id: 11612190,
+      ...>   region: "nyc1",
+      ...>   tags: ["aninterestingtag"]
+      ...> ) |> DigitalOcean.request()
+      { :ok, %DigitalOcean.Response{} }
+
+  ## Example for removing a volume from a droplet
+
+      iex> DigitalOcean.VolumeAction.create(
+      ...>   "7724db7c-e098-11e5-b522-000f53304e51",
+      ...>   type: "detach",
+      ...>   droplet_id: 11612190,
+      ...>   region: "nyc1"
+      ...> ) |> DigitalOcean.request()
+      { :ok, %DigitalOcean.Response{} }
+
+  ## Example for resizing a volume
+
+      iex> DigitalOcean.VolumeAction.create(
+      ...>   "7724db7c-e098-11e5-b522-000f53304e51",
+      ...>   type: "resize",
+      ...>   size_gigabytes: 100,
+      ...>   region: "nyc1"
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec attach_volume_to_droplet(String.t(), integer, Keyword.t()) :: Operation.t()
-  def attach_volume_to_droplet(volume_id, droplet_id, opts \\ []) do
-    opts = Keyword.put(opts, :droplet_id, droplet_id)
-    opts = Keyword.put(opts, :type, "attach")
-
+  @spec create(String.t(), Keyword.t()) :: Operation.t()
+  def create(volume_id, opts) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -21,19 +44,31 @@ defmodule DigitalOcean.VolumeAction do
   end
 
   @doc """
-  Attach a volume to a droplet by name.
+  Create an action for a volume by name.
 
-  ## Examples
+  ## Example for attaching a volume to a droplet
 
-      iex> DigitalOcean.VolumeAction.attach_volume_to_droplet_by_name("example", 11612190) |> DigitalOcean.request()
+      iex> DigitalOcean.VolumeAction.create(
+      ...>   type: "attach",
+      ...>   volume_name: "example",
+      ...>   region: "nyc1",
+      ...>   droplet_id: 11612190,
+      ...>   tags: ["aninterestingname"]
+      ...> ) |> DigitalOcean.request()
+      { :ok, %DigitalOcean.Response{} }
+
+  ## Example for detaching a volume from a droplet
+
+      iex> DigitalOcean.VolumeAction.create(
+      ...>   type: "detach",
+      ...>   droplet_id: 11612190,
+      ...>   volume_name: "example",
+      ...>   region: "nyc1"
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec attach_volume_to_droplet_by_name(String.t(), integer, Keyword.t()) :: Operation.t()
-  def attach_volume_to_droplet_by_name(volume_name, droplet_id, opts \\ []) do
-    opts = Keyword.put(opts, :volume_name, volume_name)
-    opts = Keyword.put(opts, :droplet_id, droplet_id)
-    opts = Keyword.put(opts, :type, "attach")
-
+  @spec create_by_name(Keyword.t()) :: Operation.t()
+  def create_by_name(opts) do
     %Operation{}
     |> Map.put(:method, :post)
     |> Map.put(:params, opts)
@@ -41,11 +76,11 @@ defmodule DigitalOcean.VolumeAction do
   end
 
   @doc """
-  Retrieve an action that has been executed on a volume.
+  Retrieve a volume action.
 
   ## Examples
 
-      iex> DigitalOcean.VolumeAction.get("7724db7c-e098-11e5-b522-000f53304e51", 72531856)
+      iex> DigitalOcean.VolumeAction.get("7724db7c-e098-11e5-b522-000f53304e51", 72531856) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec get(String.t(), integer) :: Operation.t()
@@ -63,68 +98,10 @@ defmodule DigitalOcean.VolumeAction do
       iex> DigitalOcean.VolumeAction.list("7724db7c-e098-11e5-b522-000f53304e51") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec list(Keyword.t()) :: Operation.t()
+  @spec list(String.t(), Keyword.t()) :: Operation.t()
   def list(volume_id, opts \\ []) do
     %Operation{}
     |> Map.put(:method, :get)
-    |> Map.put(:params, opts)
-    |> Map.put(:path, "/volumes/#{volume_id}/actions")
-  end
-
-  @doc """
-  Detach a volume from a droplet.
-
-  ## Examples
-
-      iex> DigitalOcean.VolumeAction.remove_volume_from_droplet("7724db7c-e098-11e5-b522-000f53304e51", 11612190) |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response{} }
-  """
-  @spec remove_volume_from_droplet(String.t(), integer, Keyword.t()) :: Operation.t()
-  def remove_volume_from_droplet(volume_id, droplet_id, opts \\ []) do
-    opts = Keyword.put(opts, :droplet_id, droplet_id)
-    opts = Keyword.put(opts, :type, "detach")
-
-    %Operation{}
-    |> Map.put(:method, :post)
-    |> Map.put(:params, opts)
-    |> Map.put(:path, "/volumes/#{volume_id}/actions")
-  end
-
-  @doc """
-  Detach a volume from a droplet by name.
-
-  ## Examples
-
-      iex> DigitalOcean.VolumeAction.remove_volume_from_droplet_by_name("example", 11612190) |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response{} }
-  """
-  @spec remove_volume_from_droplet_by_name(String.t(), integer, Keyword.t()) :: Operation.t()
-  def remove_volume_from_droplet_by_name(volume_name, droplet_id, opts \\ []) do
-    opts = Keyword.put(opts, :volume_name, volume_name)
-    opts = Keyword.put(opts, :droplet_id, droplet_id)
-    opts = Keyword.put(opts, :type, "detach")
-
-    %Operation{}
-    |> Map.put(:method, :post)
-    |> Map.put(:params, opts)
-    |> Map.put(:path, "/volumes/actions")
-  end
-
-  @doc """
-  Resize a volume.
-
-  ## Examples
-
-      iex> DigitalOcean.VolumeAction.resize_volume("7724db7c-e098-11e5-b522-000f53304e51", 100) |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response{} }
-  """
-  @spec resize_volume(String.t(), integer, Keyword.t()) :: Operation.t()
-  def resize_volume(volume_id, size_in_gb, opts \\ []) do
-    opts = Keyword.put(opts, :size_gigabytes, size_in_gb)
-    opts = Keyword.put(opts, :type, "resize")
-
-    %Operation{}
-    |> Map.put(:method, :post)
     |> Map.put(:params, opts)
     |> Map.put(:path, "/volumes/#{volume_id}/actions")
   end
