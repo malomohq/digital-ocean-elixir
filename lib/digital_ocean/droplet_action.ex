@@ -12,7 +12,7 @@ defmodule DigitalOcean.DropletAction do
       ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
 
-  See the official DigitalOcean v2 API documentation for all options regariding
+  See the official DigitalOcean v2 API documentation for all options regarding
   creating a droplet action.
   """
   @spec create(integer, Keyword.t()) :: Operation.t()
