@@ -14,7 +14,7 @@ defmodule DigitalOcean do
           pos_integer
 
   @type id_t ::
-          integer
+          String.t() | integer
 
   @spec request(Operation.t(), Keyword.t()) :: http_response_t
   def request(operation, config \\ []) do
