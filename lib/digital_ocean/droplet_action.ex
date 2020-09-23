@@ -15,7 +15,7 @@ defmodule DigitalOcean.DropletAction do
   See the official DigitalOcean v2 API documentation for all options regarding
   creating a droplet action.
   """
-  @spec create(integer, Keyword.t()) :: Operation.t()
+  @spec create(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def create(droplet_id, opts) do
     %Operation{}
     |> Map.put(:method, :post)
@@ -46,7 +46,7 @@ defmodule DigitalOcean.DropletAction do
       iex> DigitalOcean.DropletAction.get(3164444, 36804807) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec get(integer, integer) :: Operation.t()
+  @spec get(DigitalOcean.id_t(), DigitalOcean.id_t()) :: Operation.t()
   def get(droplet_id, action_id) do
     %Operation{}
     |> Map.put(:method, :get)

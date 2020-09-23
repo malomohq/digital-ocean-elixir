@@ -32,7 +32,7 @@ defmodule DigitalOcean.Image do
       iex> DigitalOcean.Image.delete(7938391) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec delete(integer) :: Operation.t()
+  @spec delete(DigitalOcean.id_t()) :: Operation.t()
   def delete(image_id) do
     %Operation{}
     |> Map.put(:method, :delete)
@@ -91,7 +91,7 @@ defmodule DigitalOcean.Image do
       iex> DigitalOcean.Image.update("7938391", name: "new-image-name") |> DigitalOcean.request()
       { :ok, DigitalOcean.Response{} }
   """
-  @spec update(integer, Keyword.t()) :: Operation.t()
+  @spec update(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def update(image_id, opts) do
     %Operation{}
     |> Map.put(:method, :put)

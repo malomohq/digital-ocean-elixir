@@ -37,7 +37,7 @@ defmodule DigitalOcean.FloatingIPAction do
       iex> DigitalOcean.FloatingIPAction.get("45.55.96.47", 72531856) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec get(String.t(), integer) :: Operation.t()
+  @spec get(String.t(), DigitalOcean.id_t()) :: Operation.t()
   def get(ip_addr, action_id) do
     %Operation{}
     |> Map.put(:method, :get)

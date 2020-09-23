@@ -30,7 +30,7 @@ defmodule DigitalOcean.DomainRecord do
       iex> DigitalOcean.DomainRecord.delete("example.com", 3352896) |> DigitalOcean.request()
       { :ok, %DigitalOcean.request() }
   """
-  @spec delete(String.t(), integer) :: Operation.t()
+  @spec delete(String.t(), DigitalOcean.id_t()) :: Operation.t()
   def delete(domain_name, record_id) do
     %Operation{}
     |> Map.put(:method, :delete)
@@ -45,7 +45,7 @@ defmodule DigitalOcean.DomainRecord do
       iex> DigitalOcean.DomainRecord.get("example.com", 3352896) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Operation{} }
   """
-  @spec get(String.t(), integer) :: Operation.t()
+  @spec get(String.t(), DigitalOcean.id_t()) :: Operation.t()
   def get(domain_name, record_id) do
     %Operation{}
     |> Map.put(:method, :get)
@@ -80,7 +80,7 @@ defmodule DigitalOcean.DomainRecord do
       ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec update(String.t(), integer, Keyword.t()) :: Operation.t()
+  @spec update(String.t(), DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def update(domain_name, record_id, opts) do
     %Operation{}
     |> Map.put(:method, :put)

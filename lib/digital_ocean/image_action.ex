@@ -21,7 +21,7 @@ defmodule DigitalOcean.ImageAction do
       ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec create(integer, Keyword.t()) :: Operation.t()
+  @spec create(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def create(image_id, opts) do
     %Operation{}
     |> Map.put(:method, :post)
@@ -37,7 +37,7 @@ defmodule DigitalOcean.ImageAction do
       iex> DigitalOcean.ImageAction.get(7938269, 36805527) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec get(integer, integer) :: Operation.t()
+  @spec get(DigitalOcean.id_t(), DigitalOcean.id_t()) :: Operation.t()
   def get(image_id, action_id) do
     %Operation{}
     |> Map.put(:method, :get)
@@ -52,7 +52,7 @@ defmodule DigitalOcean.ImageAction do
       iex> DigitalOcean.ImageAction.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @spec list(integer) :: Operation.t()
+  @spec list(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def list(image_id, opts \\ []) do
     %Operation{}
     |> Map.put(:method, :get)
