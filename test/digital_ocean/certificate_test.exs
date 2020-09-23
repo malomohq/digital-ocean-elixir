@@ -4,18 +4,12 @@ defmodule DigitalOcean.CertificateTest do
   alias DigitalOcean.{ Certificate, Operation }
 
   test "create/1" do
-    name = "le-cert-01"
-
-    type = "lets_encrypt"
-
-    dns_names = ["example.com"]
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [name: name, type: type, dns_names: dns_names])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/certificates")
 
-    assert expected == Certificate.create(name: name, type: type, dns_names: dns_names)
+    assert expected == Certificate.create(p1: "v")
   end
 
   test "delete/1" do
@@ -39,13 +33,11 @@ defmodule DigitalOcean.CertificateTest do
   end
 
   test "list/2" do
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/certificates")
 
-    assert expected == Certificate.list(page: page)
+    assert expected == Certificate.list(p1: "v")
   end
 end

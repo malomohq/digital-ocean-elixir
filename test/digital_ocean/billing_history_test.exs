@@ -4,13 +4,11 @@ defmodule DigitalOcean.BillingHistoryTest do
   alias DigitalOcean.{ BillingHistory, Operation }
 
   test "list/1" do
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/customers/my/billing_history")
 
-    assert expected == BillingHistory.list(page: page)
+    assert expected == BillingHistory.list(p1: "v")
   end
 end

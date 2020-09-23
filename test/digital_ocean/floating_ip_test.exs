@@ -4,14 +4,12 @@ defmodule DigitalOcean.FloatingIPTest do
   alias DigitalOcean.{ FloatingIP, Operation }
 
   test "create/1" do
-    droplet_id = 123456
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, droplet_id: droplet_id)
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/floating_ips")
 
-    assert expected == FloatingIP.create(droplet_id: droplet_id)
+    assert expected == FloatingIP.create(p1: "v")
   end
 
   test "delete/1" do
@@ -35,13 +33,11 @@ defmodule DigitalOcean.FloatingIPTest do
   end
 
   test "list/1" do
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/floating_ips")
 
-    assert expected == FloatingIP.list(page: page)
+    assert expected == FloatingIP.list(p1: "v")
   end
 end

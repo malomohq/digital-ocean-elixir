@@ -6,26 +6,12 @@ defmodule DigitalOcean.DomainRecordTest do
   test "create/2" do
     domain_name = "example.com"
 
-    type = "A"
-
-    name = "www"
-
-    data = "162.10.66.0"
-
-    ttl = 1800
-
-    params = Keyword.new()
-    params = Keyword.put(params, :type, type)
-    params = Keyword.put(params, :name, name)
-    params = Keyword.put(params, :data, data)
-    params = Keyword.put(params, :ttl, ttl)
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, params)
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records")
 
-    assert expected == DomainRecord.create(domain_name, params)
+    assert expected == DomainRecord.create(domain_name, p1: "v")
   end
 
   test "delete/2" do
@@ -55,14 +41,12 @@ defmodule DigitalOcean.DomainRecordTest do
   test "list/2" do
     domain_name = "example.com"
 
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records")
 
-    assert expected == DomainRecord.list(domain_name, page: page)
+    assert expected == DomainRecord.list(domain_name, p1: "v")
   end
 
   test "update/3" do
@@ -70,13 +54,11 @@ defmodule DigitalOcean.DomainRecordTest do
 
     record_id = 3352896
 
-    name = "blog"
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [name: name])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records/#{record_id}")
 
-    assert expected == DomainRecord.update(domain_name, record_id, name: name)
+    assert expected == DomainRecord.update(domain_name, record_id, p1: "v")
   end
 end

@@ -4,16 +4,12 @@ defmodule DigitalOcean.DomainTest do
   alias DigitalOcean.{ Domain, Operation }
 
   test "create/2" do
-    name = "example.com"
-
-    ip_address = "1.2.3.4"
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [name: name, ip_address: ip_address])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/domains")
 
-    assert expected == Domain.create(name: name, ip_address: ip_address)
+    assert expected == Domain.create(p1: "v")
   end
 
   test "delete/1" do
@@ -37,13 +33,11 @@ defmodule DigitalOcean.DomainTest do
   end
 
   test "list/1" do
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/domains")
 
-    assert expected == Domain.list(page: page)
+    assert expected == Domain.list(p1: "v")
   end
 end

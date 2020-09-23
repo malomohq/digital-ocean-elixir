@@ -4,16 +4,12 @@ defmodule DigitalOcean.CDNEndpointTest do
   alias DigitalOcean.{ CDNEndpoint, Operation }
 
   test "create/2" do
-    origin = "static-images.nyc3.digitaloceanspaces.com"
-
-    ttl = 3600
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [origin: origin, ttl: ttl])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/cdn/endpoints")
 
-    assert expected == CDNEndpoint.create(origin: origin, ttl: ttl)
+    assert expected == CDNEndpoint.create(p1: "v")
   end
 
   test "delete/1" do
@@ -37,39 +33,33 @@ defmodule DigitalOcean.CDNEndpointTest do
   end
 
   test "list/1" do
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/cdn/endpoints")
 
-    assert expected == CDNEndpoint.list(page: page)
+    assert expected == CDNEndpoint.list(p1: "v")
   end
 
   test "purge_cache/2" do
     endpoint_id = "19f06b6a-3ace-4315-b086-499a0e521b76"
 
-    files = ["*"]
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
-    expected = Map.put(expected, :params, [files: files])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/cdn/endpoints/#{endpoint_id}/cache")
 
-    assert expected == CDNEndpoint.purge_cache(endpoint_id, files: files)
+    assert expected == CDNEndpoint.purge_cache(endpoint_id, p1: "v")
   end
 
   test "update/2" do
     endpoint_id = "19f06b6a-3ace-4315-b086-499a0e521b76"
-
-    ttl = 1800
-
+    
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [ttl: ttl])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/cdn/endpoints/#{endpoint_id}")
 
-    assert expected == CDNEndpoint.update(endpoint_id, ttl: ttl)
+    assert expected == CDNEndpoint.update(endpoint_id, p1: "v")
   end
 end

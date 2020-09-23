@@ -6,34 +6,21 @@ defmodule DigitalOcean.VolumeActionTest do
   test "create/2" do
     volume_id = "7724db7c-e098-11e5-b522-000f53304e51"
 
-    params = Keyword.new()
-    params = Keyword.put(params, :type, "attach")
-    params = Keyword.put(params, :droplet_id, 11612190)
-    params = Keyword.put(params, :region, "nyc1")
-    params = Keyword.put(params, :tags, ["aninterestingtag"])
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, params)
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/volumes/#{volume_id}/actions")
 
-    assert expected == VolumeAction.create(volume_id, params)
+    assert expected == VolumeAction.create(volume_id, p1: "v")
   end
 
   test "create_by_name/2" do
-    params = Keyword.new()
-    params = Keyword.put(params, :type, "attach")
-    params = Keyword.put(params, :volume_name, "example")
-    params = Keyword.put(params, :region, "nyc1")
-    params = Keyword.put(params, :droplet_id, 11612190)
-    params = Keyword.put(params, :tags, ["aninterestingname"])
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, params)
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/volumes/actions")
 
-    assert expected == VolumeAction.create_by_name(params)
+    assert expected == VolumeAction.create_by_name(p1: "v")
   end
 
   test "get/2" do
@@ -51,13 +38,11 @@ defmodule DigitalOcean.VolumeActionTest do
   test "lits/2" do
     volume_id = "7724db7c-e098-11e5-b522-000f53304e51"
 
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/volumes/#{volume_id}/actions")
 
-    assert expected == VolumeAction.list(volume_id, page: page)
+    assert expected == VolumeAction.list(volume_id, p1: "v")
   end
 end

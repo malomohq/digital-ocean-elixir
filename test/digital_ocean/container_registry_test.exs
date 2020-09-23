@@ -58,14 +58,12 @@ defmodule DigitalOcean.ContainerRegistryTest do
   test "list_repositories/1" do
     name = "example"
 
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/registry/#{name}/repositories")
 
-    assert expected == ContainerRegistry.list_repositories(name, page: page)
+    assert expected == ContainerRegistry.list_repositories(name, p1: "v")
   end
 
   test "list_repository_tags/3" do
@@ -73,25 +71,21 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     repository_name = "repo-1"
 
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags")
 
-    assert expected == ContainerRegistry.list_repository_tags(container_registry_name, repository_name, page: page)
+    assert expected == ContainerRegistry.list_repository_tags(container_registry_name, repository_name, p1: "v")
   end
 
   test "update/1" do
-    name = "example"
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [name: name])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/registry")
 
-    assert expected == ContainerRegistry.update(name: name)
+    assert expected == ContainerRegistry.update(p1: "v")
   end
 
   test "validate_name/1" do

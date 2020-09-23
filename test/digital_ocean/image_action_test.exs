@@ -6,16 +6,12 @@ defmodule DigitalOcean.ImageActionTest do
   test "create/2" do
     image_id = 7938291
 
-    params = Keyword.new()
-    params = Keyword.put(params, :type, "transer")
-    params = Keyword.put(params, :region, "nyc2")
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, params)
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/images/#{image_id}/actions")
 
-    assert expected == ImageAction.create(image_id, params)
+    assert expected == ImageAction.create(image_id, p1: "v")
   end
 
   test "get/2" do
@@ -33,13 +29,11 @@ defmodule DigitalOcean.ImageActionTest do
   test "list/2" do
     image_id = 7555620
 
-    page = 1
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [page: page])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/images/#{image_id}/actions")
 
-    assert expected == ImageAction.list(image_id, page: page)
+    assert expected == ImageAction.list(image_id, p1: "v")
   end
 end

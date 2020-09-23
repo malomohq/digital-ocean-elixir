@@ -6,14 +6,12 @@ defmodule DigitalOcean.DropletActionTest do
   test "create/2" do
     droplet_id = 3164450
 
-    type = "enable_backups"
-
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [type: type])
+    expected = Map.put(expected, :params, [p1: "v"])
     expected = Map.put(expected, :path, "/droplets/#{droplet_id}/actions")
 
-    assert expected == DropletAction.create(droplet_id, type: type)
+    assert expected == DropletAction.create(droplet_id, p1: "v")
   end
 
   test "create_by_tag_name" do
