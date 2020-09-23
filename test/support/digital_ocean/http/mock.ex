@@ -48,13 +48,13 @@ defmodule DigitalOcean.Http.Mock do
   end
 
   @impl true
-  def request(method, url, headers, body, _opts) do
+  def send(request, _opts) do
     pid = Process.get(@proc_key)
 
-    :ok = GenServer.call(pid, { :put_request_method, method })
-    :ok = GenServer.call(pid, { :put_request_url, url })
-    :ok = GenServer.call(pid, { :put_request_headers, headers })
-    :ok = GenServer.call(pid, { :put_request_body, body })
+    :ok = GenServer.call(pid, { :put_request_method, request.method })
+    :ok = GenServer.call(pid, { :put_request_url, request.url })
+    :ok = GenServer.call(pid, { :put_request_headers, request.headers })
+    :ok = GenServer.call(pid, { :put_request_body, request.body })
 
     GenServer.call(pid, :get_response)
   end

@@ -2,15 +2,15 @@ defmodule DigitalOcean.Http.Hackney do
   @behaviour DigitalOcean.Http
 
   @impl true
-  def request(method, url, headers, body, opts) do
+  def send(request, opts) do
     opts = opts ++ [:with_body]
 
     response =
       :hackney.request(
-        method,
-        url,
-        headers,
-        body,
+        request.method,
+        request.url,
+        request.headers,
+        request.body,
         opts
       )
 
