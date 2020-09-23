@@ -1,4 +1,6 @@
 defmodule DigitalOcean.Http do
+  alias DigitalOcean.{ Request }
+
   @type response_t ::
           %{
             body: String.t(),
