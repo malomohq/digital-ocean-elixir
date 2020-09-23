@@ -7,7 +7,9 @@ defmodule DigitalOcean.Config do
     http_path_prefix: "/v2",
     http_port: nil,
     http_protocol: "https",
-    json_codec: Jason
+    json_codec: Jason,
+    retry: false,
+    retry_opts: []
   ]
 
   @type t ::
@@ -19,7 +21,9 @@ defmodule DigitalOcean.Config do
             http_path_prefix: String.t(),
             http_port: pos_integer,
             http_protocol: String.t(),
-            json_codec: module
+            json_codec: module,
+            retry: boolean | module,
+            retry_opts: Keyword.t()
           }
 
   @spec new(map) :: t
