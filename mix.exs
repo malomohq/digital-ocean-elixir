@@ -22,16 +22,14 @@ defmodule DigitalOcean.MixProject do
 
   defp deps do
     [
-      { :hackney, "~> 1.16", optional: true },
-
-      { :jason, "~> 1.2", optional: true },
+      {:hackney, "~> 1.16", optional: true},
+      {:jason, "~> 1.2", optional: true},
       #
       # dev
       #
 
-      { :dialyxir, "~> 1.0", only: :dev, runtime: false },
-
-      { :ex_doc, ">= 0.0.0", only: :dev, runtime: false }
+      {:dialyxir, "~> 1.0", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]
   end
 

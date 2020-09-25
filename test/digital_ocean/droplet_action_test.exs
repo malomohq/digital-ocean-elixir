@@ -1,14 +1,14 @@
 defmodule DigitalOcean.DropletActionTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ DropletAction, Operation }
+  alias DigitalOcean.{DropletAction, Operation}
 
   test "create/2" do
-    droplet_id = 3164450
+    droplet_id = 3_164_450
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/droplets/#{droplet_id}/actions")
 
     assert expected == DropletAction.create(droplet_id, p1: "v")
@@ -25,9 +25,9 @@ defmodule DigitalOcean.DropletActionTest do
   end
 
   test "get/2" do
-    droplet_id = 3164444
+    droplet_id = 3_164_444
 
-    action_id = 3164444
+    action_id = 3_164_444
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)

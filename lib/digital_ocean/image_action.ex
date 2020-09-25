@@ -1,5 +1,5 @@
 defmodule DigitalOcean.ImageAction do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create an action for an image.

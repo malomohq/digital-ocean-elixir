@@ -1,5 +1,5 @@
 defmodule DigitalOcean.ContainerRegistry do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Delete your container registry.
@@ -28,7 +28,10 @@ defmodule DigitalOcean.ContainerRegistry do
   def delete_repository_manifest_by_digest(container_registry_name, repository_name, digest) do
     %Operation{}
     |> Map.put(:method, :delete)
-    |> Map.put(:path, "/registry/#{container_registry_name}/repositories/#{repository_name}/digests/#{digest}")
+    |> Map.put(
+      :path,
+      "/registry/#{container_registry_name}/repositories/#{repository_name}/digests/#{digest}"
+    )
   end
 
   @doc """
@@ -43,7 +46,10 @@ defmodule DigitalOcean.ContainerRegistry do
   def delete_repository_tag(container_registry_name, repository_name, tag) do
     %Operation{}
     |> Map.put(:method, :delete)
-    |> Map.put(:path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags/#{tag}")
+    |> Map.put(
+      :path,
+      "/registry/#{container_registry_name}/repositories/#{repository_name}/tags/#{tag}"
+    )
   end
 
   @doc """
@@ -136,7 +142,7 @@ defmodule DigitalOcean.ContainerRegistry do
   def validate_name(container_registry_name) do
     %Operation{}
     |> Map.put(:method, :post)
-    |> Map.put(:params, [name: container_registry_name])
+    |> Map.put(:params, name: container_registry_name)
     |> Map.put(:path, "/registry/validate-name")
   end
 end

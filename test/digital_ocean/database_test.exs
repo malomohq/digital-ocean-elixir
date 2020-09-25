@@ -1,12 +1,12 @@
 defmodule DigitalOcean.DatabaseTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ Database, Operation }
+  alias DigitalOcean.{Database, Operation}
 
   test "create/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases")
 
     assert expected == Database.create(p1: "v")
@@ -17,7 +17,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/pools")
 
     assert expected == Database.create_connection_pool(database_id, p1: "v")
@@ -28,7 +28,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/dbs")
 
     assert expected == Database.create_db(database_id, p1: "v")
@@ -39,7 +39,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/replicas")
 
     assert expected == Database.create_replica(database_id, p1: "v")
@@ -50,7 +50,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/users")
 
     assert expected == Database.create_user(database_id, p1: "v")
@@ -195,7 +195,7 @@ defmodule DigitalOcean.DatabaseTest do
   test "list/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases")
 
     assert expected == Database.list(p1: "v")
@@ -206,7 +206,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/backups")
 
     assert expected == Database.list_backups(database_id, p1: "v")
@@ -217,7 +217,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/pools")
 
     assert expected == Database.list_connection_pools(database_id, p1: "v")
@@ -228,7 +228,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/dbs")
 
     assert expected == Database.list_dbs(database_id, p1: "v")
@@ -239,7 +239,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/firewall")
 
     assert expected == Database.list_firewall_rules(database_id, p1: "v")
@@ -250,7 +250,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/replicas")
 
     assert expected == Database.list_replicas(database_id, p1: "v")
@@ -261,7 +261,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/users")
 
     assert expected == DigitalOcean.Database.list_users(database_id, p1: "v")
@@ -272,7 +272,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/migrate")
 
     assert expected == Database.migrate_to_region(database_id, p1: "v")
@@ -285,10 +285,11 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/users/#{username}/reset_auth")
 
-    assert expected == DigitalOcean.Database.reset_user_authentication_method(database_id, username, p1: "v")
+    assert expected ==
+             DigitalOcean.Database.reset_user_authentication_method(database_id, username, p1: "v")
   end
 
   test "resize/3" do
@@ -296,7 +297,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/resize")
 
     assert expected == Database.resize(database_id, p1: "v")
@@ -307,7 +308,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/eviction_policy")
 
     assert expected == Database.update_eviction_policy(database_id, p1: "v")
@@ -318,7 +319,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/firewall")
 
     assert expected == Database.update_firewall_rules(database_id, p1: "v")
@@ -329,7 +330,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/maintenance")
 
     assert expected == Database.update_maintenance_window(database_id, p1: "v")
@@ -340,7 +341,7 @@ defmodule DigitalOcean.DatabaseTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/databases/#{database_id}/sql_mode")
 
     assert expected == Database.update_sql_mode(database_id, p1: "v")

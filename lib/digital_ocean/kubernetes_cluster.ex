@@ -1,5 +1,5 @@
 defmodule DigitalOcean.KubernetesCluster do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a Kubernetes cluster.
@@ -94,7 +94,10 @@ defmodule DigitalOcean.KubernetesCluster do
     %Operation{}
     |> Map.put(:method, :delete)
     |> Map.put(:params, opts)
-    |> Map.put(:path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}/nodes/#{node_id}")
+    |> Map.put(
+      :path,
+      "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}/nodes/#{node_id}"
+    )
   end
 
   @doc """

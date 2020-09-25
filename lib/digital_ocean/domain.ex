@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Domain do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a domain.

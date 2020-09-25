@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Account do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Show information for the current user's account.

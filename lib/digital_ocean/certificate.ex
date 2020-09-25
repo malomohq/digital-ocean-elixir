@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Certificate do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a custom or Let's Encrypt certificate.

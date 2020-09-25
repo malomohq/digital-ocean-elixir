@@ -1,10 +1,10 @@
 defmodule DigitalOcean.Helpers.Body do
   @moduledoc false
 
-  alias DigitalOcean.{ Config, Operation }
+  alias DigitalOcean.{Config, Operation}
 
   @spec encode!(Operation.t(), Config.t()) :: String.t()
-  def encode!(%_{ method: method }, _config)
+  def encode!(%_{method: method}, _config)
       when method == :delete or method == :get do
     ""
   end

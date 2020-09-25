@@ -1,14 +1,14 @@
 defmodule DigitalOcean.DomainRecordTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ DomainRecord, Operation }
+  alias DigitalOcean.{DomainRecord, Operation}
 
   test "create/2" do
     domain_name = "example.com"
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records")
 
     assert expected == DomainRecord.create(domain_name, p1: "v")
@@ -17,7 +17,7 @@ defmodule DigitalOcean.DomainRecordTest do
   test "delete/2" do
     domain_name = "example.com"
 
-    record_id = 3352896
+    record_id = 3_352_896
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
@@ -29,7 +29,7 @@ defmodule DigitalOcean.DomainRecordTest do
   test "get/2" do
     domain_name = "example.com"
 
-    record_id = 3352896
+    record_id = 3_352_896
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
@@ -43,7 +43,7 @@ defmodule DigitalOcean.DomainRecordTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records")
 
     assert expected == DomainRecord.list(domain_name, p1: "v")
@@ -52,11 +52,11 @@ defmodule DigitalOcean.DomainRecordTest do
   test "update/3" do
     domain_name = "example.com"
 
-    record_id = 3352896
+    record_id = 3_352_896
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/domains/#{domain_name}/records/#{record_id}")
 
     assert expected == DomainRecord.update(domain_name, record_id, p1: "v")

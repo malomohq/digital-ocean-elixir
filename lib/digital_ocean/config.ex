@@ -1,16 +1,14 @@
 defmodule DigitalOcean.Config do
-  defstruct [
-    access_token: nil,
-    http_client: DigitalOcean.Http.Hackney,
-    http_client_opts: [],
-    http_host: "api.digitalocean.com",
-    http_path_prefix: "/v2",
-    http_port: nil,
-    http_protocol: "https",
-    json_codec: Jason,
-    retry: false,
-    retry_opts: []
-  ]
+  defstruct access_token: nil,
+            http_client: DigitalOcean.Http.Hackney,
+            http_client_opts: [],
+            http_host: "api.digitalocean.com",
+            http_path_prefix: "/v2",
+            http_port: nil,
+            http_protocol: "https",
+            json_codec: Jason,
+            retry: false,
+            retry_opts: []
 
   @type t ::
           %__MODULE__{

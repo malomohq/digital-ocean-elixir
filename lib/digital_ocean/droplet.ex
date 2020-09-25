@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Droplet do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create one or more droplets.
@@ -70,7 +70,7 @@ defmodule DigitalOcean.Droplet do
   @spec delete_with_all_associated_resources(DigitalOcean.id_t()) :: Operation.t()
   def delete_with_all_associated_resources(droplet_id) do
     %Operation{}
-    |> Map.put(:headers, [{ "x-dangerous", "true" }])
+    |> Map.put(:headers, [{"x-dangerous", "true"}])
     |> Map.put(:method, :delete)
     |> Map.put(:path, "/droplets/#{droplet_id}/destroy_with_associated_resources/dangerous")
   end

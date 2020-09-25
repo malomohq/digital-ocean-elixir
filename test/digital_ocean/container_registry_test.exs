@@ -1,7 +1,7 @@
 defmodule DigitalOcean.ContainerRegistryTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ ContainerRegistry, Operation }
+  alias DigitalOcean.{ContainerRegistry, Operation}
 
   test "delete/0" do
     expected = %Operation{}
@@ -20,9 +20,20 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
-    expected = Map.put(expected, :path, "/registry/#{container_registry_name}/repositories/#{repository_name}/digests/#{digest}")
 
-    assert expected == ContainerRegistry.delete_repository_manifest_by_digest(container_registry_name, repository_name, digest)
+    expected =
+      Map.put(
+        expected,
+        :path,
+        "/registry/#{container_registry_name}/repositories/#{repository_name}/digests/#{digest}"
+      )
+
+    assert expected ==
+             ContainerRegistry.delete_repository_manifest_by_digest(
+               container_registry_name,
+               repository_name,
+               digest
+             )
   end
 
   test "delete_repository_tag/3" do
@@ -34,9 +45,20 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
-    expected = Map.put(expected, :path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags/#{tag}")
 
-    assert expected == ContainerRegistry.delete_repository_tag(container_registry_name, repository_name, tag)
+    expected =
+      Map.put(
+        expected,
+        :path,
+        "/registry/#{container_registry_name}/repositories/#{repository_name}/tags/#{tag}"
+      )
+
+    assert expected ==
+             ContainerRegistry.delete_repository_tag(
+               container_registry_name,
+               repository_name,
+               tag
+             )
   end
 
   test "get/0" do
@@ -60,7 +82,7 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/registry/#{name}/repositories")
 
     assert expected == ContainerRegistry.list_repositories(name, p1: "v")
@@ -73,16 +95,25 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
-    expected = Map.put(expected, :path, "/registry/#{container_registry_name}/repositories/#{repository_name}/tags")
+    expected = Map.put(expected, :params, p1: "v")
 
-    assert expected == ContainerRegistry.list_repository_tags(container_registry_name, repository_name, p1: "v")
+    expected =
+      Map.put(
+        expected,
+        :path,
+        "/registry/#{container_registry_name}/repositories/#{repository_name}/tags"
+      )
+
+    assert expected ==
+             ContainerRegistry.list_repository_tags(container_registry_name, repository_name,
+               p1: "v"
+             )
   end
 
   test "update/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/registry")
 
     assert expected == ContainerRegistry.update(p1: "v")
@@ -93,7 +124,7 @@ defmodule DigitalOcean.ContainerRegistryTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [name: name])
+    expected = Map.put(expected, :params, name: name)
     expected = Map.put(expected, :path, "/registry/validate-name")
 
     assert expected == ContainerRegistry.validate_name(name)

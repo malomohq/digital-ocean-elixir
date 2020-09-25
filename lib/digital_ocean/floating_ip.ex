@@ -1,5 +1,5 @@
 defmodule DigitalOcean.FloatingIP do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a floating IP.

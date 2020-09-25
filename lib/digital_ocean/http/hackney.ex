@@ -15,10 +15,12 @@ defmodule DigitalOcean.Http.Hackney do
       )
 
     case response do
-      { :ok, status_code, headers } ->
-        { :ok, %{ body: "", headers: headers, status_code: status_code } }
-      { :ok, status_code, headers, body } ->
-        { :ok, %{ body: body, headers: headers, status_code: status_code } }
+      {:ok, status_code, headers} ->
+        {:ok, %{body: "", headers: headers, status_code: status_code}}
+
+      {:ok, status_code, headers, body} ->
+        {:ok, %{body: body, headers: headers, status_code: status_code}}
+
       otherwise ->
         otherwise
     end

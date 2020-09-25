@@ -1,7 +1,7 @@
 defmodule DigitalOcean.BalanceTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ Balance, Operation }
+  alias DigitalOcean.{Balance, Operation}
 
   test "get/0" do
     expected = %Operation{}

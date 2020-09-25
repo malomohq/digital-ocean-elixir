@@ -1,5 +1,5 @@
 defmodule DigitalOcean.VolumeAction do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create an action for a volume.

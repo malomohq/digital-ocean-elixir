@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Firewall do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Add droplets to a firewall.
@@ -230,7 +230,7 @@ defmodule DigitalOcean.Firewall do
   def remove_tags(firewall_id, opts) do
     %Operation{}
     |> Map.put(:method, :delete)
-    |> Map.put(:params,  opts)
+    |> Map.put(:params, opts)
     |> Map.put(:path, "/firewalls/#{firewall_id}/tags")
   end
 

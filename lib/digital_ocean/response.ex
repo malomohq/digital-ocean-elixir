@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Response do
-  alias DigitalOcean.{ Config, Http }
+  alias DigitalOcean.{Config, Http}
 
   defstruct [:body, :headers, :status_code]
 

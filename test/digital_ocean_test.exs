@@ -1,20 +1,20 @@
 defmodule DigitalOceanTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ Http, Operation, Response }
+  alias DigitalOcean.{Http, Operation, Response}
 
-  @ok_resp %{ body: "{\"ok\":true}", headers: [], status_code: 200 }
+  @ok_resp %{body: "{\"ok\":true}", headers: [], status_code: 200}
 
-  @not_ok_resp %{ body: "{\"ok\":false}", headers: [], status_code: 400 }
+  @not_ok_resp %{body: "{\"ok\":false}", headers: [], status_code: 400}
 
   test "sends the proper HTTP method" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :get, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :get, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -24,11 +24,11 @@ defmodule DigitalOceanTest do
   test "uses the proper URL for GET requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :get, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :get, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -38,11 +38,11 @@ defmodule DigitalOceanTest do
   test "uses the proper URL for DELETE requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :delete, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :delete, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -52,11 +52,11 @@ defmodule DigitalOceanTest do
   test "uses the proper URL for non-GET requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :post, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :post, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -66,31 +66,31 @@ defmodule DigitalOceanTest do
   test "sends the proper HTTP headers" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
     operation = %Operation{}
-    operation = Map.put(operation, :headers, [{ "x-custom-header", "true" }])
+    operation = Map.put(operation, :headers, [{"x-custom-header", "true"}])
     operation = Map.put(operation, :method, :get)
-    operation = Map.put(operation, :params, [hello: "world"])
+    operation = Map.put(operation, :params, hello: "world")
     operation = Map.put(operation, :path, "/fake")
 
     DigitalOcean.request(operation, access_token: "thisisfake", http_client: Http.Mock)
 
-    assert { "content-type", "application/json" } in Http.Mock.get_request_headers()
-    assert { "authorization", "Bearer thisisfake" } in Http.Mock.get_request_headers()
-    assert { "x-custom-header", "true" } in Http.Mock.get_request_headers()
+    assert {"content-type", "application/json"} in Http.Mock.get_request_headers()
+    assert {"authorization", "Bearer thisisfake"} in Http.Mock.get_request_headers()
+    assert {"x-custom-header", "true"} in Http.Mock.get_request_headers()
   end
 
   test "sends the proper body for GET requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :get, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :get, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -100,11 +100,11 @@ defmodule DigitalOceanTest do
   test "sends the proper body for DELETE requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :delete, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :delete, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -114,11 +114,11 @@ defmodule DigitalOceanTest do
   test "sends the proper body for non-GET requests" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :post, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :post, params: [hello: "world"], path: "/fake"}
 
     DigitalOcean.request(operation, http_client: Http.Mock)
 
@@ -128,39 +128,39 @@ defmodule DigitalOceanTest do
   test "returns :ok when the request is successful" do
     Http.Mock.start_link()
 
-    response = { :ok, @ok_resp }
+    response = {:ok, @ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :post, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :post, params: [hello: "world"], path: "/fake"}
 
     result = DigitalOcean.request(operation, http_client: Http.Mock)
 
-    assert { :ok, %Response{} } = result
+    assert {:ok, %Response{}} = result
   end
 
   test "returns :error when the request is not successful" do
     Http.Mock.start_link()
 
-    response = { :ok, @not_ok_resp }
+    response = {:ok, @not_ok_resp}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :post, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :post, params: [hello: "world"], path: "/fake"}
 
     result = DigitalOcean.request(operation, http_client: Http.Mock)
 
-    assert { :error, %Response{} } = result
+    assert {:error, %Response{}} = result
   end
 
   test "passes the response through when unrecognized" do
     Http.Mock.start_link()
 
-    response = { :error, :timeout }
+    response = {:error, :timeout}
 
     Http.Mock.put_response(response)
 
-    operation = %Operation{ method: :post, params: [hello: "world"], path: "/fake" }
+    operation = %Operation{method: :post, params: [hello: "world"], path: "/fake"}
 
     result = DigitalOcean.request(operation, http_client: Http.Mock)
 

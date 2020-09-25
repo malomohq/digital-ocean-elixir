@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Action do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Retrieve a details about a specific action.
@@ -12,7 +12,7 @@ defmodule DigitalOcean.Action do
   @spec get(DigitalOcean.id_t()) :: Operation.t()
   def get(action_id) do
     %Operation{}
-    |> Map.put(:method,  :get)
+    |> Map.put(:method, :get)
     |> Map.put(:path, "/actions/#{action_id}")
   end
 

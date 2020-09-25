@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Database do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a new database cluster or create a database cluster from a backup.

@@ -1,7 +1,7 @@
 defmodule DigitalOcean.InvoiceTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ Invoice, Operation }
+  alias DigitalOcean.{Invoice, Operation}
 
   test "get/1" do
     invoice_id = "22737513-0ea7-4206-8ceb-98a575af7681"
@@ -46,7 +46,7 @@ defmodule DigitalOcean.InvoiceTest do
   test "list/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/customers/my/invoices")
 
     assert expected == Invoice.list(p1: "v")

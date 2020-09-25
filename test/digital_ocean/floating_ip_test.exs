@@ -1,12 +1,12 @@
 defmodule DigitalOcean.FloatingIPTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ FloatingIP, Operation }
+  alias DigitalOcean.{FloatingIP, Operation}
 
   test "create/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/floating_ips")
 
     assert expected == FloatingIP.create(p1: "v")
@@ -35,7 +35,7 @@ defmodule DigitalOcean.FloatingIPTest do
   test "list/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/floating_ips")
 
     assert expected == FloatingIP.list(p1: "v")

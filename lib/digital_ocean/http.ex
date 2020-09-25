@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Http do
-  alias DigitalOcean.{ Request }
+  alias DigitalOcean.{Request}
 
   @type response_t ::
           %{
@@ -11,5 +11,5 @@ defmodule DigitalOcean.Http do
   @callback send(
               request :: Request.t(),
               opts :: any
-            ) :: { :ok, response_t } | { :error, response_t | any }
+            ) :: {:ok, response_t} | {:error, response_t | any}
 end

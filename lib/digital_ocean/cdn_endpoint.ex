@@ -1,5 +1,5 @@
 defmodule DigitalOcean.CDNEndpoint do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a CDN endpoint.

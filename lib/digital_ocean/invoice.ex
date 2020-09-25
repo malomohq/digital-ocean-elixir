@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Invoice do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Retrieve an invoice.

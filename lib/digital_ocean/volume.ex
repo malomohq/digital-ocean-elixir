@@ -1,5 +1,5 @@
 defmodule DigitalOcean.Volume do
-  alias DigitalOcean.{ Operation }
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a volume.

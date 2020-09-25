@@ -1,12 +1,12 @@
 defmodule DigitalOcean.KubernetesClusterClusterTest do
   use ExUnit.Case, async: true
 
-  alias DigitalOcean.{ KubernetesCluster, Operation }
+  alias DigitalOcean.{KubernetesCluster, Operation}
 
   test "create/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters")
 
     assert expected == KubernetesCluster.create(p1: "v")
@@ -17,7 +17,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools")
 
     assert expected == KubernetesCluster.create_node_pool(cluster_id, p1: "v")
@@ -42,8 +42,14 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
-    expected = Map.put(expected, :params, [p1: "v"])
-    expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}/nodes/#{node_id}")
+    expected = Map.put(expected, :params, p1: "v")
+
+    expected =
+      Map.put(
+        expected,
+        :path,
+        "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}/nodes/#{node_id}"
+      )
 
     assert expected == KubernetesCluster.delete_node(cluster_id, node_pool_id, node_id, p1: "v")
   end
@@ -55,7 +61,9 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :delete)
-    expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
+
+    expected =
+      Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
 
     assert expected == KubernetesCluster.delete_node_pool(cluster_id, node_pool_id)
   end
@@ -75,7 +83,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/clusterlint")
 
     assert expected == KubernetesCluster.get_clusterlint_diagnostics(cluster_id, p1: "v")
@@ -108,7 +116,9 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
+
+    expected =
+      Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
 
     assert expected == KubernetesCluster.get_node_pool(cluster_id, node_pool_id)
   end
@@ -134,7 +144,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
   test "list/1" do
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters")
 
     assert expected == KubernetesCluster.list(p1: "v")
@@ -145,7 +155,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :get)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools")
 
     assert expected == KubernetesCluster.list_node_pools(cluster_id, p1: "v")
@@ -156,7 +166,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/clusterlint")
 
     assert expected == KubernetesCluster.run_clusterlint(cluster_id, p1: "v")
@@ -167,7 +177,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}")
 
     assert expected == KubernetesCluster.update(cluster_id, p1: "v")
@@ -180,8 +190,10 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :put)
-    expected = Map.put(expected, :params, [p1: "v"])
-    expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
+    expected = Map.put(expected, :params, p1: "v")
+
+    expected =
+      Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/node_pools/#{node_pool_id}")
 
     assert expected == KubernetesCluster.update_node_pool(cluster_id, node_pool_id, p1: "v")
   end
@@ -191,7 +203,7 @@ defmodule DigitalOcean.KubernetesClusterClusterTest do
 
     expected = %Operation{}
     expected = Map.put(expected, :method, :post)
-    expected = Map.put(expected, :params, [p1: "v"])
+    expected = Map.put(expected, :params, p1: "v")
     expected = Map.put(expected, :path, "/kubernetes/clusters/#{cluster_id}/upgrade")
 
     assert expected == KubernetesCluster.upgrade(cluster_id, p1: "v")
