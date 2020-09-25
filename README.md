@@ -2,7 +2,7 @@
 
 ## Installation
 
-`digital_coean` is published on Hex. Add it to your list of dependencies in
+`digital_ocean` is published on Hex. Add it to your list of dependencies in
 `mix.exs`:
 
 ```elixir
@@ -26,6 +26,9 @@ building a request that can be sent to the DigitalOcean v2 API using the
 ```elixir
 DigitalOcean.Account.get() |> DigitalOcean.request(access_token: "...")
 ```
+
+For details on individual resource types [please see our documentation on
+HexDocs](https://hexdocs.pm/digital_ocean).
 
 ## Configuration
 
