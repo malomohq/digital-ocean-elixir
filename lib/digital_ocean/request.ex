@@ -46,7 +46,7 @@ defmodule DigitalOcean.Request do
     request = Map.put(request, :private, private)
 
     request
-    |> config.http_client.send(config)
+    |> config.http_client.send(config.http_client_opts)
     |> retry(request, config)
     |> finish(config)
 
