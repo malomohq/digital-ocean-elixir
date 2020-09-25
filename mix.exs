@@ -4,12 +4,13 @@ defmodule DigitalOcean.MixProject do
   def project do
     [
       app: :digital_ocean,
-      version: "0.0.0",
+      version: "0.1.0",
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       dialyzer: dialyzer(),
-      elixirc_paths: elixirc_paths(Mix.env())
+      elixirc_paths: elixirc_paths(Mix.env()),
+      package: package()
     ]
   end
 
@@ -47,5 +48,17 @@ defmodule DigitalOcean.MixProject do
 
   defp elixirc_paths(_env) do
     ["lib"]
+  end
+
+  defp package do
+    %{
+      description: "Elixir client for the DigitalOcean v2 API",
+      maintainers: ["Anthony Smith"],
+      licenses: ["MIT"],
+      links: %{
+        GitHub: "https://github.com/malomohq/digital-ocean-elixir",
+        "Made by Malomo - Post-purchase experiences that customers love": "https://gomalomo.com"
+      }
+    }
   end
 end
