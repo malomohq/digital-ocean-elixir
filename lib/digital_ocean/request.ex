@@ -69,7 +69,7 @@ defmodule DigitalOcean.Request do
   end
 
   defp do_retry(response, request, config) do
-    attempt = Map.get(request.private, :attempt) |> IO.inspect()
+    attempt = Map.get(request.private, :attempt)
 
     max_attempts = Keyword.get(config.retry_opts, :max_attempts, 3)
 
