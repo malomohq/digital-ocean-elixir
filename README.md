@@ -66,7 +66,8 @@ by providing a module that implements the `DigitalOcean.Retry` behaviour to the
 Currently, `digital_ocean` provides a `DigitalOcean.Retry.Linear` strategy for
 retrying requests. This strategy will automatically retry a request on a set
 interval. You can configure the interval by adding `:retry_in` with the number
-of milliseconds to wait to the `:retry_opts` option.
+of milliseconds to wait before sending another request to the `:retry_opts`
+option.
 
 **Example**
 
