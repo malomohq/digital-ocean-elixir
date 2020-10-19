@@ -12,11 +12,11 @@ jobs:
       - uses: actions/cache@v1
 
         with:
-          key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+          key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: actions/setup-elixir@v1.2.0
+      - uses: actions/setup-elixir@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
@@ -29,10 +29,14 @@ jobs:
 
     strategy:
       matrix:
-        elixir: ["1.8.x", "1.9.x", "1.10.x"]
+        elixir: ["1.8.x", "1.9.x", "1.10.x", "1.11.x"]
 
         exclude:
           - elixir: "1.10.x"
+
+            otp: "20.x"
+
+          - elixir: "1.11.x"
 
             otp: "20.x"
 
@@ -47,11 +51,11 @@ jobs:
       - uses: actions/cache@v1
 
         with:
-          key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}
+          key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: actions/setup-elixir@v1.2.0
+      - uses: actions/setup-elixir@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
@@ -64,10 +68,14 @@ jobs:
 
     strategy:
       matrix:
-        elixir: ["1.8.x", "1.9.x", "1.10.x"]
+        elixir: ["1.8.x", "1.9.x", "1.10.x", "1.11.x"]
 
         exclude:
           - elixir: "1.10.x"
+
+            otp: "20.x"
+
+          - elixir: "1.11.x"
 
             otp: "20.x"
 
