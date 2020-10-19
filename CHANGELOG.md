@@ -6,8 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0]
+
 ### Added
 
 - Support for all load balancer endpoints. [@anthonator](https://github.com/anthonator)
 
-[Unreleased]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.1.2...v0.2.0
