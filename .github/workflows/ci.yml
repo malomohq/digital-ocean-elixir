@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
 
         with:
           key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-elixir@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
@@ -46,16 +46,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
 
-      - uses: actions/cache@v1
+      - uses: actions/cache@v2
 
         with:
           key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: actions/setup-elixir@v1
+      - uses: erlef/setup-elixir@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
