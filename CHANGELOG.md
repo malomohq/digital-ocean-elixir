@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Added
+
+- Support for all tag endpoints. [@johnhidey](https://github.com/johnhidey)
+
 ### Changed
 
 - Added elixir 1.11 to test matrix. [@anthonator](https://github.com/anthonator)
@@ -18,5 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for all load balancer endpoints. [@anthonator](https://github.com/anthonator)
 
-[Unreleased]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.3.0...HEAD
 [0.2.0]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.1.2...v0.2.0
+[0.3.0]: https://github.com/malomohq/digital-ocean-elixir/compare/v0.0.2.0...v0.3.0
