@@ -24,7 +24,7 @@ defmodule DigitalOcean.Tag do
 
   ## Examples
 
-      iex> DigitalOcean.Domain.delete("mytag") |> DigitalOcean.request()
+      iex> DigitalOcean.Tag.delete("mytag") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec delete(String.t()) :: Operation.t()
@@ -39,7 +39,7 @@ defmodule DigitalOcean.Tag do
 
   ## Examples
 
-      iex> DigitalOcean.Domain.get("mytag") |> DigitalOcean.request()
+      iex> DigitalOcean.Tag.get("mytag") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec get(String.t()) :: Operation.t()
@@ -54,7 +54,7 @@ defmodule DigitalOcean.Tag do
 
   ## Examples
 
-      iex> DigitalOcean.Domain.list() |> DigitalOcean.request()
+      iex> DigitalOcean.Tag.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec list(Keyword.t()) :: Operation.t()
