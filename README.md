@@ -7,7 +7,7 @@
 
 ```elixir
 defp deps do
-  { :digital_ocean, "~> 0.3.0" }
+  { :digital_ocean, "~> 0.4.0" }
 end
 ```
 
