@@ -1,19 +1,18 @@
-defmodule DigitalOcean.SSHKeys do
-  alias DigitalOcean.{ Operation }
+defmodule DigitalOcean.SSHKey do
+  alias DigitalOcean.{Operation}
 
   @doc """
   Create a new SSH key.
 
-  ## Example creating a new SSH key
+  ## Examples
 
-      iex> DigitalOcean.SSHKeys.create(
+      iex> DigitalOcean.SSHKey.create(
       ...>   name: "my ssh public key",
       ...>   public_key: "ssh-rsa AEXAMPLEaC1yc2EAAAADAQABAAAAQQDDHr/jh2Jy4yALcK4JyWbVkPRaWmhck3IgCoeOO3z1e2dBowLh64QAM+Qb72pxekALga2oi4GvT+TlWNhzPH4V example",
       ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @type create_opts :: [name: String.t(), public_key: String.t()]
-  @spec create(create_opts()) :: Operation.t()
+  @spec create(Keyword.t()) :: Operation.t()
   def create(opts) do
     %Operation{}
     |> Map.put(:method, :post)
@@ -23,16 +22,15 @@ defmodule DigitalOcean.SSHKeys do
 
   @doc """
   Retrieve an existing SSH key.
-  Either the ID or the fingerprint of an existing SSH key
 
   ## Examples
 
-      iex> DigitalOcean.SSHKeys.get(3164494) |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.get(3164494) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response() }
 
   ## Examples
 
-      iex> DigitalOcean.SSHKeys.get("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa") |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.get("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response() }
   """
   @spec get(DigitalOcean.id_t()) :: Operation.t()
@@ -44,8 +42,10 @@ defmodule DigitalOcean.SSHKeys do
 
   @doc """
   Retrieve a list of all SSH keys.
+
   ## Examples
-      iex> DigitalOcean.SSHKeys.list() |> DigitalOcean.request()
+
+      iex> DigitalOcean.SSHKey.list() |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec list(Keyword.t()) :: Operation.t()
@@ -62,16 +62,15 @@ defmodule DigitalOcean.SSHKeys do
 
   ## Examples
 
-      iex> DigitalOcean.SSHKeys.update(512189, name: "New Name For SSH Public Key") |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.update(512189, name: "New Name For SSH Public Key") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
 
   ## Examples
 
-      iex> DigitalOcean.SSHKeys.update("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa", name: "New Name For SSH Public Key") |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.update("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa", name: "New Name For SSH Public Key") |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
-  @typep update_opts :: [name: String.t()]
-  @spec update(DigitalOcean.id_t(), update_opts()) :: Operation.t()
+  @spec update(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
   def update(key_id, opts \\ []) do
     %Operation{}
     |> Map.put(:method, :put)
@@ -80,11 +79,11 @@ defmodule DigitalOcean.SSHKeys do
   end
 
   @doc """
-  Delete a droplet.
+  Delete a key.
 
   ## Examples
 
-      iex> DigitalOcean.Droplet.delete(3164494) |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.delete(3164494) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec delete(DigitalOcean.id_t()) :: Operation.t()
