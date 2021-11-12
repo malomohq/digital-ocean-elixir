@@ -2,7 +2,7 @@ defmodule DigitalOcean.SSHKey do
   alias DigitalOcean.{Operation}
 
   @doc """
-  Create a new SSH key.
+  Create an SSH key.
 
   ## Examples
 
@@ -21,16 +21,26 @@ defmodule DigitalOcean.SSHKey do
   end
 
   @doc """
+  Delete an SSH key.
+
+  ## Examples
+
+      iex> DigitalOcean.SSHKey.delete(3164494) |> DigitalOcean.request()
+      { :ok, %DigitalOcean.Response{} }
+  """
+  @spec delete(DigitalOcean.id_t()) :: Operation.t()
+  def delete(key_id) do
+    %Operation{}
+    |> Map.put(:method, :delete)
+    |> Map.put(:path, "/account/keys/#{key_id}")
+  end
+
+  @doc """
   Retrieve an existing SSH key.
 
   ## Examples
 
-      iex> DigitalOcean.SSHKey.get(3164494) |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response() }
-
-  ## Examples
-
-      iex> DigitalOcean.SSHKey.get("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa") |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.get(512190) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response() }
   """
   @spec get(DigitalOcean.id_t()) :: Operation.t()
@@ -41,7 +51,7 @@ defmodule DigitalOcean.SSHKey do
   end
 
   @doc """
-  Retrieve a list of all SSH keys.
+  Retrieve a list of SSH keys.
 
   ## Examples
 
@@ -58,16 +68,13 @@ defmodule DigitalOcean.SSHKey do
 
   @doc """
   Update the name of an SSH key.
-  Either the ID or the fingerprint of an existing SSH key
 
   ## Examples
 
-      iex> DigitalOcean.SSHKey.update(512189, name: "New Name For SSH Public Key") |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response{} }
-
-  ## Examples
-
-      iex> DigitalOcean.SSHKey.update("3b:16:bf:e4:8b:00:8b:b8:59:8c:a9:d3:f0:19:45:fa", name: "New Name For SSH Public Key") |> DigitalOcean.request()
+      iex> DigitalOcean.SSHKey.update(
+      ...>   512190,
+      ...>   name: "New Name For SSH Public Key"
+      ...> ) |> DigitalOcean.request()
       { :ok, %DigitalOcean.Response{} }
   """
   @spec update(DigitalOcean.id_t(), Keyword.t()) :: Operation.t()
@@ -75,21 +82,6 @@ defmodule DigitalOcean.SSHKey do
     %Operation{}
     |> Map.put(:method, :put)
     |> Map.put(:params, opts)
-    |> Map.put(:path, "/account/keys/#{key_id}")
-  end
-
-  @doc """
-  Delete a key.
-
-  ## Examples
-
-      iex> DigitalOcean.SSHKey.delete(3164494) |> DigitalOcean.request()
-      { :ok, %DigitalOcean.Response{} }
-  """
-  @spec delete(DigitalOcean.id_t()) :: Operation.t()
-  def delete(key_id) do
-    %Operation{}
-    |> Map.put(:method, :delete)
     |> Map.put(:path, "/account/keys/#{key_id}")
   end
 end
