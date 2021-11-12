@@ -3,80 +3,62 @@ name: ci
 on: push
 
 jobs:
-  dialyzer:
-    runs-on: ubuntu-latest
+    dialyzer:
+        runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
+            - uses: actions/cache@v2
 
-        with:
-          key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
+              with:
+                  key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
-          path: _build
+                  path: _build
 
-      - uses: erlef/setup-elixir@v1
+            - uses: erlef/setup-beam@v1
 
-        with:
-          elixir-version: ${{ matrix.elixir }}
+              with:
+                  elixir-version: ${{ matrix.elixir }}
 
-          otp-version: ${{ matrix.otp }}
+                  otp-version: ${{ matrix.otp }}
 
-      - run: mix deps.get
+            - run: mix deps.get
 
-      - run: mix dialyzer
+            - run: mix dialyzer
 
-    strategy:
-      matrix:
-        elixir: ["1.8.x", "1.9.x", "1.10.x", "1.11.x"]
+        strategy:
+            matrix:
+                elixir: ["1.10.x", "1.11.x", "1.12.x"]
 
-        exclude:
-          - elixir: "1.10.x"
+                otp: [22.x, 23.x, 24.x]
 
-            otp: "20.x"
+    test:
+        runs-on: ubuntu-latest
 
-          - elixir: "1.11.x"
+        steps:
+            - uses: actions/checkout@v2
 
-            otp: "20.x"
+            - uses: actions/cache@v2
 
-        otp: [20.x, 21.x, 22.x, 23.x]
+              with:
+                  key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
-  test:
-    runs-on: ubuntu-latest
+                  path: _build
 
-    steps:
-      - uses: actions/checkout@v2
+            - uses: erlef/setup-beam@v1
 
-      - uses: actions/cache@v2
+              with:
+                  elixir-version: ${{ matrix.elixir }}
 
-        with:
-          key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
+                  otp-version: ${{ matrix.otp }}
 
-          path: _build
+            - run: mix deps.get
 
-      - uses: erlef/setup-elixir@v1
+            - run: mix test
 
-        with:
-          elixir-version: ${{ matrix.elixir }}
+        strategy:
+            matrix:
+                elixir: ["1.10.x", "1.11.x", "1.12.x"]
 
-          otp-version: ${{ matrix.otp }}
-
-      - run: mix deps.get
-
-      - run: mix test
-
-    strategy:
-      matrix:
-        elixir: ["1.8.x", "1.9.x", "1.10.x", "1.11.x"]
-
-        exclude:
-          - elixir: "1.10.x"
-
-            otp: "20.x"
-
-          - elixir: "1.11.x"
-
-            otp: "20.x"
-
-        otp: [20.x, 21.x, 22.x, 23.x]
+                otp: [22.x, 23.x, 24.x]
