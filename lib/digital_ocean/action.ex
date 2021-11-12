@@ -2,7 +2,7 @@ defmodule DigitalOcean.Action do
   alias DigitalOcean.{ Operation }
 
   @doc """
-  Retrieve a details about a specific action.
+  Retrieve details about a specific action.
 
   ## Examples
 
