@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Support for all monitoring endpoints. [@anthonator](https://github.com/anthonator)
+- Support for all SSH key endpoints. [@mazz-seven](https://github.com/mazz-seven)
 
 ### Changed
 
