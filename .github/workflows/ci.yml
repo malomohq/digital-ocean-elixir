@@ -14,7 +14,9 @@ jobs:
               with:
                   key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
-                  path: _build
+                  path: |
+                      _build
+                      deps
 
             - uses: erlef/setup-beam@v1
 
@@ -25,11 +27,13 @@ jobs:
 
             - run: mix deps.get
 
+            - run: mix compile
+
             - run: mix dialyzer
 
         strategy:
             matrix:
-                elixir: ["1.10.x", "1.11.x", "1.12.x"]
+                elixir: ["1.11.x", "1.12.x", "1.13.x"]
 
                 otp: [22.x, 23.x, 24.x]
 
@@ -44,7 +48,10 @@ jobs:
               with:
                   key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
-                  path: _build
+                  path: |
+                      _build
+                      deps
+
 
             - uses: erlef/setup-beam@v1
 
@@ -55,10 +62,12 @@ jobs:
 
             - run: mix deps.get
 
+            - run: mix compile
+
             - run: mix test
 
         strategy:
             matrix:
-                elixir: ["1.10.x", "1.11.x", "1.12.x"]
+                elixir: ["1.11.x", "1.12.x", "1.13.x"]
 
                 otp: [22.x, 23.x, 24.x]
