@@ -13,9 +13,10 @@ defmodule DigitalOcean.Response do
   @spec new(Http.response_t(), Config.t()) :: t
   def new(response, config) do
     body =
-      response
-      |> Map.get(:body)
-      |> config.json_codec.decode!()
+      case Map.get(response, :body) do
+        "" -> ""
+        body -> config.json_codec.decode!(body)
+      end
 
     %__MODULE__{}
     |> Map.put(:body, body)
