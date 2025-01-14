@@ -6,7 +6,7 @@ jobs:
   dialyzer:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.1
+      - uses: actions/checkout@v4.2.2
 
       - id: beam
         uses: erlef/setup-beam@v1.18.2
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4.2.1
+      - uses: actions/checkout@v4.2.2
 
       - id: beam
         uses: erlef/setup-beam@v1.18.2
