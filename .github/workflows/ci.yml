@@ -3,71 +3,85 @@ name: ci
 on: push
 
 jobs:
-    dialyzer:
-        runs-on: ubuntu-latest
+  dialyzer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.1
 
-        steps:
-            - uses: actions/checkout@v2
+      - id: beam
+        uses: erlef/setup-beam@v1.18.2
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
-            - uses: actions/cache@v2
+      - uses: actions/cache@v4.1.1
+        with:
+          key: ${{ github.job }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ hashFiles('mix.lock') }}-1
+          path: _build
 
-              with:
-                  key: dialyzer-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
+      - run: mix deps.get
 
-                  path: |
-                      _build
-                      deps
+      - run: mix dialyzer
 
-            - uses: erlef/setup-beam@v1
+    strategy:
+      matrix:
+        elixir:
+          - 1.18.x
+          - 1.17.x
+          - 1.16.x
+        otp:
+          - 27.x
+          - 26.x
+          - 25.x
+          - 24.x
+        exclude:
+          - elixir: 1.16.x
+            otp: 27.x
 
-              with:
-                  elixir-version: ${{ matrix.elixir }}
+          - elixir: 1.17.x
+            otp: 24.x
 
-                  otp-version: ${{ matrix.otp }}
+          - elixir: 1.18.x
+            otp: 24.x
 
-            - run: mix deps.get
+  test:
+    runs-on: ubuntu-latest
 
-            - run: mix compile
+    steps:
+      - uses: actions/checkout@v4.2.1
 
-            - run: mix dialyzer
+      - id: beam
+        uses: erlef/setup-beam@v1.18.2
+        with:
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
 
-        strategy:
-            matrix:
-                elixir: ["1.11.x", "1.12.x", "1.13.x"]
+      - uses: actions/cache@v4.1.1
+        with:
+          key: ${{ github.job }}-${{ steps.beam.outputs.elixir-version }}-${{ steps.beam.outputs.otp-version }}-${{ hashFiles('mix.lock') }}-1
+          path: _build
 
-                otp: [22.x, 23.x, 24.x]
+      - run: mix deps.get
 
-    test:
-        runs-on: ubuntu-latest
+      - run: mix test
 
-        steps:
-            - uses: actions/checkout@v2
+    strategy:
+      matrix:
+        elixir:
+          - 1.18.x
+          - 1.17.x
+          - 1.16.x
+        otp:
+          - 27.x
+          - 26.x
+          - 25.x
+          - 24.x
+        exclude:
+          - elixir: 1.16.x
+            otp: 27.x
 
-            - uses: actions/cache@v2
+          - elixir: 1.17.x
+            otp: 24.x
 
-              with:
-                  key: test-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
-
-                  path: |
-                      _build
-                      deps
-
-
-            - uses: erlef/setup-beam@v1
-
-              with:
-                  elixir-version: ${{ matrix.elixir }}
-
-                  otp-version: ${{ matrix.otp }}
-
-            - run: mix deps.get
-
-            - run: mix compile
-
-            - run: mix test
-
-        strategy:
-            matrix:
-                elixir: ["1.11.x", "1.12.x", "1.13.x"]
-
-                otp: [22.x, 23.x, 24.x]
+          - elixir: 1.18.x
+            otp: 24.x
